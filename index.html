@@ -2,199 +2,194 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
+<title>Chinelos Personalizados | Orçamento Online</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Orçamento de Chinelos Personalizados</title>
+
+<!-- PDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
 <style>
-body {
-    margin: 0;
-    font-family: 'Segoe UI', Arial, sans-serif;
-    background: #f4f6f8;
-    color: #333;
+:root{
+    --azul:#0d47a1;
+    --amarelo:#ffca28;
 }
 
-/* ===== CABEÇALHO ===== */
-header {
-    background: linear-gradient(135deg, #ff9800, #ff5722);
-    color: white;
-    padding: 40px 20px;
-    text-align: center;
+body{
+    margin:0;
+    font-family:Arial, Helvetica, sans-serif;
+    background:#f4f6f8;
+    color:#333;
 }
 
-header h1 {
-    font-size: 2.4rem;
-    margin-bottom: 10px;
+/* ===== HERO ===== */
+.hero{
+    background:linear-gradient(135deg,var(--azul),#1976d2);
+    color:white;
+    padding:50px 20px;
+    text-align:center;
 }
-
-header p {
-    font-size: 1.1rem;
-    max-width: 700px;
-    margin: auto;
-}
+.hero h1{font-size:2.5rem;margin-bottom:10px;}
+.hero p{font-size:1.1rem;max-width:700px;margin:auto;}
 
 /* ===== CONTAINER ===== */
-.container {
-    max-width: 1100px;
-    margin: auto;
-    padding: 20px;
+.container{
+    max-width:1100px;
+    margin:auto;
+    padding:20px;
+}
+
+/* ===== EVENTO ===== */
+select, input{
+    width:100%;
+    padding:12px;
+    border-radius:8px;
+    border:1px solid #ccc;
+    margin-top:6px;
 }
 
 /* ===== GALERIA ===== */
-.galeria {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 15px;
-    margin-top: 30px;
+.galeria{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:15px;
+    margin:30px 0;
+}
+.galeria img{
+    width:100%;
+    border-radius:12px;
+    box-shadow:0 4px 10px rgba(0,0,0,.15);
 }
 
-.galeria img {
-    width: 100%;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+/* ===== CARD ===== */
+.card{
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 6px 15px rgba(0,0,0,.1);
 }
 
-/* ===== ORÇAMENTO ===== */
-.orcamento {
-    background: white;
-    margin-top: 40px;
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+/* ===== TOTAL ===== */
+.total{
+    font-size:1.4rem;
+    font-weight:bold;
+    color:#2e7d32;
+    text-align:center;
+    margin-top:15px;
 }
 
-.orcamento h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #ff5722;
+/* ===== BOTÕES ===== */
+.btn{
+    padding:15px;
+    width:100%;
+    border:none;
+    border-radius:10px;
+    font-size:1.1rem;
+    cursor:pointer;
+    margin-top:15px;
 }
-
-label {
-    display: block;
-    margin-top: 15px;
-    font-weight: bold;
-}
-
-input, select {
-    width: 100%;
-    padding: 12px;
-    margin-top: 6px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    font-size: 1rem;
-}
-
-.total {
-    margin-top: 20px;
-    font-size: 1.4rem;
-    font-weight: bold;
-    color: #2e7d32;
-    text-align: center;
-}
-
-/* ===== BOTÃO ===== */
-button {
-    width: 100%;
-    margin-top: 25px;
-    padding: 15px;
-    font-size: 1.1rem;
-    border: none;
-    border-radius: 10px;
-    background: #25d366;
-    color: white;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-button:hover {
-    background: #1ebe5d;
-}
+.whatsapp{background:#25d366;color:white;}
+.pdf{background:var(--amarelo);color:#333;}
 </style>
 </head>
 
 <body>
 
-<header>
+<!-- HERO -->
+<div class="hero">
     <h1>Chinelos Personalizados</h1>
-    <p>Perfeitos para aniversários, casamentos, eventos e brindes especiais.  
-    Faça agora seu orçamento rápido e receba no WhatsApp!</p>
-</header>
+    <p id="textoHero">
+        Lembrancinhas elegantes, criativas e inesquecíveis para o seu evento.
+    </p>
+</div>
 
 <div class="container">
 
-    <!-- GALERIA -->
-    <section class="galeria">
-        <img src="https://images.unsplash.com/photo-1596464716127-f2a82984de30" alt="Chinelo personalizado">
-        <img src="https://images.unsplash.com/photo-1585386959984-a41552231693" alt="Chinelo decorado">
-        <img src="https://images.unsplash.com/photo-1600185365483-26d7f7f7c1e0" alt="Chinelos para festa">
-        <img src="https://images.unsplash.com/photo-1611095973513-5e8f97cfa0c5" alt="Chinelo evento">
-    </section>
+<!-- ESCOLHA EVENTO -->
+<div class="card">
+    <label>Tipo de Evento</label>
+    <select id="evento" onchange="trocarEvento()">
+        <option value="casamento">💍 Casamento</option>
+        <option value="infantil">🎈 Aniversário Infantil</option>
+        <option value="formatura">🎓 Formatura</option>
+    </select>
+</div>
 
-    <!-- ORÇAMENTO -->
-    <section class="orcamento">
-        <h2>Solicite seu Orçamento</h2>
+<!-- GALERIA -->
+<div class="galeria" id="galeria">
+    <img src="https://images.unsplash.com/photo-1596464716127-f2a82984de30">
+    <img src="https://images.unsplash.com/photo-1600185365483-26d7f7f7c1e0">
+    <img src="https://images.unsplash.com/photo-1585386959984-a41552231693">
+</div>
 
-        <label>Seu nome</label>
-        <input type="text" id="nome" placeholder="Digite seu nome">
+<!-- ORÇAMENTO -->
+<div class="card" id="areaPDF">
+    <h2 style="text-align:center;color:var(--azul)">Orçamento Rápido</h2>
 
-        <label>Quantidade de pares</label>
-        <input type="number" id="quantidade" value="10" min="1">
+    <label>Nome do Cliente</label>
+    <input id="nome" placeholder="Digite seu nome">
 
-        <label>Modelo do chinelo</label>
-        <select id="modelo">
-            <option value="25">Simples – R$25,00</option>
-            <option value="35">Personalizado – R$35,00</option>
-            <option value="45">Luxo – R$45,00</option>
-        </select>
+    <label>Quantidade de pares</label>
+    <input type="number" id="qtd" value="20" min="1">
 
-        <label>Tipo de personalização</label>
-        <select id="personalizacao">
-            <option value="0">Estampa simples (inclusa)</option>
-            <option value="5">Nome individual (+R$5,00)</option>
-            <option value="10">Tema + Nome (+R$10,00)</option>
-        </select>
+    <label>Modelo</label>
+    <select id="modelo">
+        <option value="30">Simples – R$30</option>
+        <option value="40">Personalizado – R$40</option>
+        <option value="55">Luxo – R$55</option>
+    </select>
 
-        <div class="total" id="total">
-            Total: R$ 0,00
-        </div>
+    <div class="total" id="total">Total: R$ 0,00</div>
+</div>
 
-        <button onclick="enviarWhatsApp()">📲 Enviar orçamento no WhatsApp</button>
-    </section>
+<button class="btn whatsapp" onclick="enviarWhats()">📲 Enviar no WhatsApp</button>
+<button class="btn pdf" onclick="gerarPDF()">🖨️ Gerar PDF</button>
 
 </div>
 
 <script>
-function calcularTotal() {
-    let qtd = Number(document.getElementById("quantidade").value);
-    let modelo = Number(document.getElementById("modelo").value);
-    let personalizacao = Number(document.getElementById("personalizacao").value);
-
-    let total = qtd * (modelo + personalizacao);
-    document.getElementById("total").innerText = 
-        "Total: R$ " + total.toFixed(2).replace(".", ",");
+function calcular(){
+    let qtd = Number(qtdInput.value);
+    let modelo = Number(modeloInput.value);
+    let total = qtd * modelo;
+    totalDiv.innerText = "Total: R$ " + total.toFixed(2).replace(".",",");
 }
 
-document.querySelectorAll("input, select").forEach(el => {
-    el.addEventListener("input", calcularTotal);
-});
+const qtdInput = document.getElementById("qtd");
+const modeloInput = document.getElementById("modelo");
+const totalDiv = document.getElementById("total");
 
-calcularTotal();
+[qtdInput,modeloInput].forEach(e=>e.addEventListener("input",calcular));
+calcular();
 
-function enviarWhatsApp() {
-    let nome = document.getElementById("nome").value;
-    let qtd = document.getElementById("quantidade").value;
-    let modelo = document.getElementById("modelo").options[document.getElementById("modelo").selectedIndex].text;
-    let personalizacao = document.getElementById("personalizacao").options[document.getElementById("personalizacao").selectedIndex].text;
-    let total = document.getElementById("total").innerText;
+/* EVENTOS */
+function trocarEvento(){
+    let e = evento.value;
+    let texto = document.getElementById("textoHero");
 
-    let mensagem = `Olá! Quero um orçamento de chinelos personalizados 👡%0A
-Nome: ${nome}%0A
-Quantidade: ${qtd} pares%0A
-Modelo: ${modelo}%0A
-Personalização: ${personalizacao}%0A
-${total}`;
+    if(e==="casamento"){
+        texto.innerText="Elegância e carinho para agradecer seus convidados.";
+    }
+    if(e==="infantil"){
+        texto.innerText="Diversão, cores e personagens que as crianças amam.";
+    }
+    if(e==="formatura"){
+        texto.innerText="Um brinde inesquecível para marcar sua conquista.";
+    }
+}
 
-    let telefone = "5599999999999"; // <<< TROQUE PELO SEU WHATSAPP
-    window.open(`https://wa.me/${telefone}?text=${mensagem}`, "_blank");
+/* WHATSAPP */
+function enviarWhats(){
+    let msg = `Olá! Quero orçamento de chinelos personalizados.
+Evento: ${evento.value}
+Nome: ${nome.value}
+Quantidade: ${qtd.value}
+${total.innerText}`;
+    window.open("https://wa.me/5579999145044?text="+encodeURIComponent(msg));
+}
+
+/* PDF */
+function gerarPDF(){
+    html2pdf().from(document.getElementById("areaPDF")).save("orcamento-chinelos.pdf");
 }
 </script>
 
