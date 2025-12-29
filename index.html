@@ -5,7 +5,7 @@
 <title>GilArt Chinelos Personalizados</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- PDF -->
+<!-- html2pdf FUNCIONAL -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
 <style>
@@ -14,7 +14,6 @@
     --dourado:#ffca28;
 }
 
-/* GERAL */
 body{
     margin:0;
     font-family: Arial, Helvetica, sans-serif;
@@ -30,18 +29,16 @@ body{
     border-bottom:5px solid var(--dourado);
 }
 .logo{
-    max-width:360px;
+    max-width:340px;
     width:100%;
     margin:0 auto 15px;
     display:block;
-    filter:drop-shadow(0 6px 10px rgba(0,0,0,.35));
 }
 .hero p{
     color:#fff;
     font-size:1.1rem;
     max-width:700px;
     margin:auto;
-    opacity:.95;
 }
 
 /* CONTAINER */
@@ -61,9 +58,7 @@ body{
 }
 
 /* FORM */
-label{
-    font-weight:bold;
-}
+label{font-weight:bold;}
 input,select{
     width:100%;
     padding:12px;
@@ -104,14 +99,8 @@ input,select{
     cursor:pointer;
     margin-top:15px;
 }
-.whatsapp{
-    background:#25d366;
-    color:#fff;
-}
-.pdf{
-    background:var(--dourado);
-    color:#333;
-}
+.whatsapp{background:#25d366;color:#fff;}
+.pdf{background:var(--dourado);color:#333;}
 
 /* WHATSAPP FLUTUANTE */
 .whatsapp-fixo{
@@ -138,7 +127,7 @@ input,select{
 
 <!-- HERO -->
 <div class="hero">
-    <img src="./logo-gilart.png" alt="GilArt Chinelos Personalizados" class="logo">
+    <img src="./logo-gilart.png" class="logo">
     <p id="textoHero">
         Chinelos personalizados de alto padrão para momentos inesquecíveis
     </p>
@@ -150,13 +139,13 @@ input,select{
 <div class="card">
     <label>Tipo de Evento</label>
     <select id="evento" onchange="trocarEvento()">
-        <option value="Casamento">💍 Casamento</option>
-        <option value="Aniversário Infantil">🎈 Aniversário Infantil</option>
-        <option value="Formatura">🎓 Formatura</option>
+        <option>Casamento</option>
+        <option>Aniversário Infantil</option>
+        <option>Formatura</option>
     </select>
 </div>
 
-<!-- GALERIA (SUAS IMAGENS) -->
+<!-- GALERIA -->
 <div class="galeria">
     <img src="./chinelo-casamento.png">
     <img src="./chinelo-luxo.jpg">
@@ -164,18 +153,18 @@ input,select{
 </div>
 
 <!-- ORÇAMENTO / PDF -->
-<div class="card" id="areaPDF">
+<div class="card" id="areaPDF" style="background:white;">
 
-    <div style="text-align:center; margin-bottom:20px;">
-        <img src="./logo-gilart.png" style="max-width:220px;">
-        <h2 style="color:var(--azul);">Orçamento de Chinelos Personalizados</h2>
+    <div style="text-align:center;margin-bottom:20px;">
+        <img src="./logo-gilart.png" style="max-width:200px;" crossorigin="anonymous">
+        <h2 style="color:var(--azul);">Orçamento de Chinelos</h2>
     </div>
 
     <label>Nome do Cliente</label>
-    <input id="nome" placeholder="Digite seu nome">
+    <input id="nome">
 
     <label>Quantidade de pares</label>
-    <input type="number" id="qtd" value="20" min="1">
+    <input type="number" id="qtd" value="20">
 
     <label>Modelo</label>
     <select id="modelo">
@@ -186,13 +175,6 @@ input,select{
 
     <div class="total" id="total">Total: R$ 0,00</div>
 
-    <!-- DADOS PDF -->
-    <p><strong>Evento:</strong> <span id="pdfEvento"></span></p>
-    <p><strong>Cliente:</strong> <span id="pdfNome"></span></p>
-    <p><strong>Quantidade:</strong> <span id="pdfQtd"></span></p>
-    <p><strong>Modelo:</strong> <span id="pdfModelo"></span></p>
-    <h3 id="pdfTotal" style="text-align:center;color:#2e7d32;"></h3>
-
 </div>
 
 <button class="btn whatsapp" onclick="enviarWhats()">📲 Enviar no WhatsApp</button>
@@ -200,7 +182,6 @@ input,select{
 
 </div>
 
-<!-- WHATSAPP FLUTUANTE -->
 <a href="https://wa.me/5579999145044" class="whatsapp-fixo" target="_blank">💬</a>
 
 <script>
@@ -214,7 +195,6 @@ const totalDiv = document.getElementById("total");
 [qtd,modelo].forEach(e=>e.addEventListener("input",calcular));
 calcular();
 
-/* EVENTO */
 function trocarEvento(){
     const textos={
         "Casamento":"Elegância e carinho para agradecer seus convidados.",
@@ -224,48 +204,38 @@ function trocarEvento(){
     textoHero.innerText=textos[evento.value];
 }
 
-/* WHATSAPP */
 function enviarWhats(){
-    let msg=`Olá! Quero orçamento de chinelos personalizados.
+    let msg =
+`Olá! Quero um orçamento de chinelos personalizados.
+
 Evento: ${evento.value}
 Nome: ${nome.value}
 Quantidade: ${qtd.value}
 ${totalDiv.innerText}`;
-    window.open("https://wa.me/5579999145044?text="+encodeURIComponent(msg));
+
+    window.open(
+        "https://wa.me/5579999145044?text=" + encodeURIComponent(msg),
+        "_blank"
+    );
 }
 
-/* PDF */
-<script>
 function gerarPDF(){
-
-    // Preenche os dados do PDF
-    document.getElementById("pdfEvento").innerText = evento.value;
-    document.getElementById("pdfNome").innerText = nome.value || "Não informado";
-    document.getElementById("pdfQtd").innerText = qtd.value;
-    document.getElementById("pdfModelo").innerText =
-        modelo.options[modelo.selectedIndex].text;
-    document.getElementById("pdfTotal").innerText = totalDiv.innerText;
-
-    const elemento = document.getElementById("areaPDF");
-
-    html2pdf(elemento, {
-        margin: 10,
-        filename: "orcamento-gilart-chinelos.pdf",
-        image: { type: "jpeg", quality: 0.98 },
-        html2canvas: {
-            scale: 2,
-            useCORS: true,
-            allowTaint: true
+    html2pdf().set({
+        margin:10,
+        filename:'orcamento-gilart.pdf',
+        html2canvas:{
+            scale:2,
+            useCORS:true,
+            allowTaint:true
         },
-        jsPDF: {
-            unit: "mm",
-            format: "a4",
-            orientation: "portrait"
+        jsPDF:{
+            unit:'mm',
+            format:'a4',
+            orientation:'portrait'
         }
-    });
+    }).from(document.getElementById("areaPDF")).save();
 }
 </script>
 
-   
 </body>
 </html>
