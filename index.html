@@ -14,6 +14,28 @@
     width:100%;
     margin-bottom:15px;
 }
+.whatsapp-fixo{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background: #25d366;
+    color: white;
+    font-size: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.35);
+    z-index: 999;
+    transition: transform 0.2s ease;
+}
+
+.whatsapp-fixo:hover{
+    transform: scale(1.08);
+}
 
 
 body{
@@ -21,15 +43,19 @@ body{
 
 }
 
-/* ===== HERO ===== */
-.hero{
-    background:linear-gradient(135deg,var(--azul),#1976d2);
-    color:white;
-    padding:50px 20px;
-    text-align:center;
-}
-.hero h1{font-size:2.5rem;margin-bottom:10px;}
-.hero p{font-size:1.1rem;max-width:700px;margin:auto;}
+<div class="hero">
+    <img src="./logo-gilart.png" alt="GilArt Chinelos Personalizados" class="logo">
+
+    <p id="textoHero" style="
+        color:#fff;
+        font-size:1.1rem;
+        max-width:700px;
+        margin: auto;
+        opacity:0.95;">
+        Chinelos personalizados de alto padrão para momentos inesquecíveis
+    </p>
+</div>
+
 
 /* ===== CONTAINER ===== */
 .container{
@@ -194,6 +220,12 @@ function gerarPDF(5579999145044){
     html2pdf().from(document.getElementById("areaPDF")).save("orcamento-chinelos.pdf");
 }
 </script>
+<a href="https://wa.me/5579999145044"
+   class="whatsapp-fixo"
+   target="_blank"
+   aria-label="WhatsApp">
+   💬
+</a>
 
 </body>
 </html>
