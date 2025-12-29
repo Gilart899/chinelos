@@ -151,7 +151,27 @@ select, input{
 
 <!-- ORÇAMENTO -->
 <div class="card" id="areaPDF">
-    <h2 style="text-align:center;color:var(--azul)">Orçamento Rápido</h2>
+
+    <div style="text-align:center; margin-bottom:20px;">
+        <img src="./logo-gilart.png" style="max-width:220px;">
+        <h2 style="margin:10px 0; color:#0d47a1;">Orçamento de Chinelos Personalizados</h2>
+    </div>
+
+    <p><strong>Evento:</strong> <span id="pdfEvento"></span></p>
+    <p><strong>Cliente:</strong> <span id="pdfNome"></span></p>
+    <p><strong>Quantidade:</strong> <span id="pdfQtd"></span> pares</p>
+    <p><strong>Modelo:</strong> <span id="pdfModelo"></span></p>
+
+    <hr>
+
+    <h3 style="text-align:center; color:#2e7d32;" id="pdfTotal"></h3>
+
+    <p style="text-align:center; font-size:0.9rem; margin-top:20px;">
+        Produção sob encomenda • GilArt Chinelos Personalizados
+    </p>
+
+</div>
+
 
     <label>Nome do Cliente</label>
     <input id="nome" placeholder="Digite seu nome">
@@ -175,12 +195,35 @@ select, input{
 </div>
 
 <script>
-function calcular(){
-    let qtd = Number(qtdInput.value);
-    let modelo = Number(modeloInput.value);
-    let total = qtd * modelo;
-    totalDiv.innerText = "Total: R$ " + total.toFixed(2).replace(".",",");
+<script>
+function gerarPDF(){
+
+    document.getElementById("pdfEvento").innerText =
+        document.getElementById("evento").options[evento.selectedIndex].text;
+
+    document.getElementById("pdfNome").innerText =
+        document.getElementById("nome").value || "Não informado";
+
+    document.getElementById("pdfQtd").innerText =
+        document.getElementById("qtd").value;
+
+    document.getElementById("pdfModelo").innerText =
+        document.getElementById("modelo").options[modelo.selectedIndex].text;
+
+    document.getElementById("pdfTotal").innerText =
+        document.getElementById("total").innerText;
+
+    html2pdf().from(document.getElementById("areaPDF"))
+        .set({
+            margin: 10,
+            filename: 'orcamento-gilart-chinelos.pdf',
+            html2canvas: { scale: 2 },
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        })
+        .save();
 }
+</script>
+
 
 const qtdInput = document.getElementById("qtd");
 const modeloInput = document.getElementById("modelo");
