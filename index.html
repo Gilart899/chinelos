@@ -225,50 +225,31 @@ function gerarPDF(){
 </script>
 
 
-const qtdInput = document.getElementById("qtd");
-const modeloInput = document.getElementById("modelo");
-const totalDiv = document.getElementById("total");
+<script>
+function gerarPDF(){
 
-[qtdInput,modeloInput].forEach(e=>e.addEventListener("input",calcular));
-calcular();
+    document.getElementById("pdfEvento").innerText =
+        document.getElementById("evento").options[evento.selectedIndex].text;
 
-/* EVENTOS */
-function trocarEvento(){
-    let e = evento.value;
-    let texto = document.getElementById("textoHero");
+    document.getElementById("pdfNome").innerText =
+        document.getElementById("nome").value || "Não informado";
 
-    if(e==="casamento"){
-        texto.innerText="Elegância e carinho para agradecer seus convidados.";
-    }
-    if(e==="infantil"){
-        texto.innerText="Diversão, cores e personagens que as crianças amam.";
-    }
-    if(e==="formatura"){
-        texto.innerText="Um brinde inesquecível para marcar sua conquista.";
-    }
-}
+    document.getElementById("pdfQtd").innerText =
+        document.getElementById("qtd").value;
 
-/* WHATSAPP */
-function enviarWhats(){
-    let msg = `Olá! Quero orçamento de chinelos personalizados.
-Evento: ${evento.value}
-Nome: ${nome.value}
-Quantidade: ${qtd.value}
-${total.innerText}`;
-    window.open("https://wa.me/5579999145044?text="+encodeURIComponent(msg));
-}
+    document.getElementById("pdfModelo").innerText =
+        document.getElementById("modelo").options[modelo.selectedIndex].text;
 
-/* PDF */
-function gerarPDF(5579999145044){
-    html2pdf().from(document.getElementById("areaPDF")).save("orcamento-chinelos.pdf");
+    document.getElementById("pdfTotal").innerText =
+        document.getElementById("total").innerText;
+
+    html2pdf().from(document.getElementById("areaPDF"))
+        .set({
+            margin: 10,
+            filename: 'orcamento-gilart-chinelos.pdf',
+            html2canvas: { scale: 2 },
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        })
+        .save();
 }
 </script>
-<a href="https://wa.me/5579999145044"
-   class="whatsapp-fixo"
-   target="_blank"
-   aria-label="WhatsApp">
-   💬
-</a>
-
-</body>
-</html>
