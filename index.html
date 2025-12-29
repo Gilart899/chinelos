@@ -235,21 +235,39 @@ ${totalDiv.innerText}`;
 }
 
 /* PDF */
+<script>
 function gerarPDF(){
-    pdfEvento.innerText=evento.value;
-    pdfNome.innerText=nome.value||"Não informado";
-    pdfQtd.innerText=qtd.value;
-    pdfModelo.innerText=modelo.options[modelo.selectedIndex].text;
-    pdfTotal.innerText=totalDiv.innerText;
 
-    html2pdf().from(areaPDF).set({
-        margin:10,
-        filename:"orcamento-gilart.pdf",
-        html2canvas:{scale:2},
-        jsPDF:{unit:"mm",format:"a4",orientation:"portrait"}
-    }).save();
+    // Preenche os dados do PDF
+    document.getElementById("pdfEvento").innerText = evento.value;
+    document.getElementById("pdfNome").innerText = nome.value || "Não informado";
+    document.getElementById("pdfQtd").innerText = qtd.value;
+    document.getElementById("pdfModelo").innerText =
+        modelo.options[modelo.selectedIndex].text;
+    document.getElementById("pdfTotal").innerText = totalDiv.innerText;
+
+    const elemento = document.getElementById("areaPDF");
+
+    html2pdf(elemento, {
+        margin: 10,
+        filename: "orcamento-gilart-chinelos.pdf",
+        image: { type: "jpeg", quality: 0.98 },
+        html2canvas: {
+            scale: 2,
+            useCORS: true,
+            allowTaint: true
+        },
+        jsPDF: {
+            unit: "mm",
+            format: "a4",
+            orientation: "portrait"
+        }
+    });
 }
 </script>
+
+
+  
 
 </body>
 </html>
