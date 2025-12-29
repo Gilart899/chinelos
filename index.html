@@ -228,12 +228,44 @@ function gerarPDF(){
             useCORS:true,
             allowTaint:true
         },
-        jsPDF:{
-            unit:'mm',
-            format:'a4',
-            orientation:'portrait'
-        }
-    }).from(document.getElementById("areaPDF")).save();
+       <!-- jsPDF OFICIAL -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script>
+const { jsPDF } = window.jspdf;
+
+function gerarPDF(){
+    const doc = new jsPDF();
+
+    let y = 20;
+
+    doc.setFont("Helvetica","bold");
+    doc.setFontSize(18);
+    doc.text("ORÇAMENTO - GILART CHINELOS", 105, y, {align:"center"});
+
+    y += 15;
+    doc.setFontSize(12);
+    doc.setFont("Helvetica","normal");
+
+    doc.text(`Cliente: ${nome.value || "Não informado"}`, 20, y); y+=8;
+    doc.text(`Evento: ${evento.value}`, 20, y); y+=8;
+    doc.text(`Quantidade: ${qtd.value} pares`, 20, y); y+=8;
+
+    const modeloTexto = modelo.options[modelo.selectedIndex].text;
+    doc.text(`Modelo: ${modeloTexto}`, 20, y); y+=10;
+
+    doc.setFont("Helvetica","bold");
+    doc.setFontSize(14);
+    doc.text(totalDiv.innerText, 20, y);
+
+    y+=20;
+    doc.setFontSize(10);
+    doc.setFont("Helvetica","normal");
+    doc.text("Validade do orçamento: 7 dias", 20, y);
+
+    doc.text("WhatsApp: (79) 99914-5044", 20, y+8);
+
+    doc.save("orcamento-gilart.pdf");
 }
 </script>
 
