@@ -5,7 +5,6 @@
 <title>GilArt | Chinelos Personalizados</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- jsPDF (PDF DEFINITIVO – nunca branco) -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <style>
@@ -14,120 +13,45 @@
   --dourado:#ffca28;
   --verde:#25d366;
 }
-body{
-  margin:0;
-  font-family:Arial, Helvetica, sans-serif;
-  background:#f4f6f8;
-  color:#333;
-}
+body{margin:0;font-family:Arial;background:#f4f6f8}
 .hero{
   background:linear-gradient(135deg,#0d47a1,#102a43);
-  color:#fff;
-  padding:60px 20px;
-  text-align:center;
-  border-bottom:5px solid var(--dourado);
+  color:#fff;padding:60px 20px;text-align:center;
+  border-bottom:5px solid var(--dourado)
 }
-.hero h1{
-  margin:0;
-  font-size:2.2rem;
-}
-.hero p{
-  max-width:720px;
-  margin:12px auto 0;
-  font-size:1.1rem;
-}
-.container{
-  max-width:1100px;
-  margin:auto;
-  padding:20px;
-}
+.container{max-width:1100px;margin:auto;padding:20px}
 .card{
-  background:#fff;
-  padding:25px;
-  border-radius:15px;
-  box-shadow:0 6px 15px rgba(0,0,0,.1);
-  margin-bottom:25px;
+  background:#fff;padding:25px;border-radius:15px;
+  box-shadow:0 6px 15px rgba(0,0,0,.1);margin-bottom:25px
 }
-label{
-  font-weight:bold;
-}
-input,select{
-  width:100%;
-  padding:12px;
-  margin-top:6px;
-  border-radius:8px;
-  border:1px solid #ccc;
-}
-.galeria{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:15px;
-  margin:25px 0;
-}
-.galeria img{
-  width:100%;
-  border-radius:12px;
-  box-shadow:0 4px 10px rgba(0,0,0,.15);
-}
-.total{
-  text-align:center;
-  font-size:1.6rem;
-  font-weight:bold;
-  color:#2e7d32;
-  margin-top:18px;
-}
-.btn{
-  width:100%;
-  padding:16px;
-  font-size:1.1rem;
-  border:none;
-  border-radius:12px;
-  cursor:pointer;
-  margin-top:15px;
-}
-.btn-whats{background:var(--verde);color:white;}
-.btn-pdf{background:var(--dourado);}
+label{font-weight:bold}
+input,select{width:100%;padding:12px;margin-top:6px;border-radius:8px;border:1px solid #ccc}
+.galeria{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px;margin:25px 0}
+.galeria img{width:100%;border-radius:12px}
+.total{text-align:center;font-size:1.6rem;font-weight:bold;color:#2e7d32;margin-top:15px}
+.btn{width:100%;padding:16px;font-size:1.1rem;border:none;border-radius:12px;margin-top:15px;cursor:pointer}
+.whats{background:var(--verde);color:#fff}
+.pdf{background:var(--dourado)}
 .whatsapp-fixo{
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  width:60px;
-  height:60px;
-  background:var(--verde);
-  color:white;
-  font-size:32px;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-decoration:none;
-  box-shadow:0 6px 15px rgba(0,0,0,.35);
-  z-index:999;
-}
-footer{
-  text-align:center;
-  padding:25px;
-  font-size:.9rem;
-  color:#666;
+  position:fixed;bottom:20px;right:20px;width:60px;height:60px;
+  background:var(--verde);color:#fff;font-size:32px;
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  text-decoration:none;z-index:999
 }
 </style>
 </head>
 
 <body>
 
-<!-- HERO / VENDA -->
 <div class="hero">
   <h1>Chinelos Personalizados GilArt</h1>
-  <p id="textoHero">
-    Elegância, conforto e personalização para momentos inesquecíveis
-  </p>
+  <p id="textoHero">Elegância e conforto para momentos inesquecíveis</p>
 </div>
 
 <div class="container">
 
-<!-- EVENTO -->
 <div class="card">
-  <label>Tipo de Evento</label>
+  <label>Evento</label>
   <select id="evento" onchange="trocarEvento()">
     <option>Casamento</option>
     <option>Aniversário Infantil</option>
@@ -135,19 +59,17 @@ footer{
   </select>
 </div>
 
-<!-- GALERIA -->
 <div class="galeria">
-  <img src="./chinelo-casamento.png">
-  <img src="./chinelo-luxo.jpg">
-  <img src="./kit-chinelo-sacola.png">
+  <img src="chinelo-casamento.png">
+  <img src="chinelo-luxo.jpg">
+  <img src="kit-chinelo-sacola.png">
 </div>
 
-<!-- ORÇAMENTO -->
 <div class="card">
   <label>Nome do Cliente</label>
-  <input id="nome" placeholder="Ex: Maria Silva">
+  <input id="nome">
 
-  <label>Quantidade de pares</label>
+  <label>Quantidade</label>
   <input type="number" id="qtd" value="20">
 
   <label>Modelo</label>
@@ -160,100 +82,75 @@ footer{
   <div class="total" id="total">Total: R$ 0,00</div>
 </div>
 
-<button class="btn btn-whats" onclick="enviarWhats()">📲 Enviar no WhatsApp</button>
-<button class="btn btn-pdf" onclick="gerarPDF()">🖨️ Gerar PDF</button>
+<button class="btn whats" onclick="enviarWhats()">📲 Enviar no WhatsApp</button>
+<button class="btn pdf" onclick="gerarPDF()">🖨️ Gerar PDF</button>
 
 </div>
 
 <a class="whatsapp-fixo" href="https://wa.me/5579999145044" target="_blank">💬</a>
 
-<footer>
-  © GilArt Chinelos Personalizados – Orçamento automático
-</footer>
-
 <script>
-/* ===== CALCULADORA ===== */
+const SHEETS_URL="https://script.google.com/macros/s/AKfycbyyHhlYtHXv09cU-t7Das1R74UezjwfcjDrYK82hvwmGI1cTSfa17NnsPGlaN1DOFRV-A/exec";
+
 const qtd=document.getElementById("qtd");
 const modelo=document.getElementById("modelo");
 const totalDiv=document.getElementById("total");
 
 function calcular(){
-  const total=qtd.value*modelo.value;
-  totalDiv.innerText="Total: R$ "+total.toFixed(2).replace(".",",");
+  totalDiv.innerText="Total: R$ "+(qtd.value*modelo.value).toFixed(2).replace(".",",");
 }
-[qtd,modelo].forEach(el=>el.addEventListener("input",calcular));
+[qtd,modelo].forEach(e=>e.addEventListener("input",calcular));
 calcular();
 
-/* ===== EVENTOS ===== */
 function trocarEvento(){
-  const textos={
+  const t={
     "Casamento":"Elegância e carinho para agradecer seus convidados.",
-    "Aniversário Infantil":"Cores, alegria e diversão para os pequenos.",
-    "Formatura":"Um brinde inesquecível para celebrar sua conquista."
+    "Aniversário Infantil":"Cores e diversão para os pequenos.",
+    "Formatura":"Celebre sua conquista com estilo."
   };
-  textoHero.innerText=textos[evento.value];
+  textoHero.innerText=t[evento.value];
 }
-
-/* ===== GOOGLE SHEETS ===== */
-const SHEETS_URL="https://script.google.com/macros/s/AKfycbyyHhlYtHXv09cU-t7Das1R74UezjwfcjDrYK82hvwmGI1cTSfa17NnsPGlaN1DOFRV-A/exec";
 
 function salvarPedido(){
   fetch(SHEETS_URL,{
     method:"POST",
     headers:{"Content-Type":"application/json"},
     body:JSON.stringify({
-      nome:nome.value||"Não informado",
+      nome:nome.value,
       evento:evento.value,
       quantidade:qtd.value,
       modelo:modelo.options[modelo.selectedIndex].text,
-      valor:totalDiv.innerText
+      valor:totalDiv.innerText,
+      status:"Orçamento"
     })
   }).catch(()=>{});
 }
 
-/* ===== WHATSAPP ===== */
 function enviarWhats(){
   salvarPedido();
-  const msg=`Olá! Quero um orçamento de chinelos personalizados.
+  const msg=`Olá! Quero um orçamento.
 
 Evento: ${evento.value}
 Nome: ${nome.value}
 Quantidade: ${qtd.value}
 ${totalDiv.innerText}`;
-  window.open(
-    "https://wa.me/5579999145044?text="+encodeURIComponent(msg),
-    "_blank"
-  );
+  window.open("https://wa.me/5579999145044?text="+encodeURIComponent(msg));
 }
 
-/* ===== PDF PROFISSIONAL (NUNCA EM BRANCO) ===== */
 function gerarPDF(){
-  const { jsPDF }=window.jspdf;
+  const {jsPDF}=window.jspdf;
   const doc=new jsPDF();
-
   let y=20;
-  doc.setFont("Helvetica","bold");
   doc.setFontSize(18);
-  doc.text("ORÇAMENTO - GILART CHINELOS",105,y,{align:"center"});
-
+  doc.text("ORÇAMENTO GILART",105,y,{align:"center"});
   y+=15;
   doc.setFontSize(12);
-  doc.setFont("Helvetica","normal");
-  doc.text(`Cliente: ${nome.value||"-"}`,20,y); y+=8;
-  doc.text(`Evento: ${evento.value}`,20,y); y+=8;
-  doc.text(`Quantidade: ${qtd.value} pares`,20,y); y+=8;
-  doc.text(`Modelo: ${modelo.options[modelo.selectedIndex].text}`,20,y); y+=10;
-
-  doc.setFont("Helvetica","bold");
+  doc.text(`Cliente: ${nome.value}`,20,y);y+=8;
+  doc.text(`Evento: ${evento.value}`,20,y);y+=8;
+  doc.text(`Quantidade: ${qtd.value}`,20,y);y+=8;
+  doc.text(`Modelo: ${modelo.options[modelo.selectedIndex].text}`,20,y);y+=10;
   doc.setFontSize(14);
   doc.text(totalDiv.innerText,20,y);
-
-  y+=20;
-  doc.setFontSize(10);
-  doc.setFont("Helvetica","normal");
-  doc.text("Validade do orçamento: 7 dias",20,y);
-  doc.text("Contato: (79) 99914-5044",20,y+8);
-
   doc.save("orcamento-gilart.pdf");
 }
 </script>
