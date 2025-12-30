@@ -5,7 +5,6 @@
 <title>GilArt Chinelos Personalizados</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- html2pdf FUNCIONAL -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
 <style>
@@ -13,77 +12,47 @@
     --azul:#0d47a1;
     --dourado:#ffca28;
 }
-<script>
-const SHEETS_URL = "https://script.google.com/macros/s/AKfycbyyHhlYtHXv09cU-t7Das1R74UezjwfcjDrYK82hvwmGI1cTSfa17NnsPGlaN1DOFRV-A/exec";
-
-function salvarPedidoSheets(){
-    fetch(SHEETS_URL,{
-        method:"POST",
-        headers:{"Content-Type":"application/json"},
-        body:JSON.stringify({
-            nome: nome.value || "Não informado",
-            evento: evento.value,
-            quantidade: qtd.value,
-            modelo: modelo.options[modelo.selectedIndex].text,
-            valor: totalDiv.innerText
-        })
-    }).catch(err=>console.log("Erro Sheets",err));
-}
-</script>
 body{
     margin:0;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family:Arial, sans-serif;
     background:#f4f6f8;
     color:#333;
 }
-
-/* HERO */
 .hero{
     background:linear-gradient(135deg,#0d47a1,#102a43);
-    padding:60px 20px 50px;
+    padding:60px 20px;
     text-align:center;
     border-bottom:5px solid var(--dourado);
 }
-.logo{
-    max-width:340px;
-    width:100%;
-    margin:0 auto 15px;
-    display:block;
+.hero h1{
+    color:white;
+    margin:0;
 }
 .hero p{
-    color:#fff;
-    font-size:1.1rem;
+    color:white;
     max-width:700px;
-    margin:auto;
+    margin:10px auto 0;
 }
-
-/* CONTAINER */
 .container{
-    max-width:1100px;
+    max-width:1000px;
     margin:auto;
     padding:20px;
 }
-
-/* CARD */
 .card{
-    background:#fff;
+    background:white;
     padding:25px;
     border-radius:15px;
     box-shadow:0 6px 15px rgba(0,0,0,.1);
     margin-bottom:25px;
 }
-
-/* FORM */
 label{font-weight:bold;}
 input,select{
     width:100%;
     padding:12px;
+    margin-top:6px;
     border-radius:8px;
     border:1px solid #ccc;
-    margin-top:6px;
 }
-
-/* GALERIA */
 .galeria{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
@@ -93,32 +62,25 @@ input,select{
 .galeria img{
     width:100%;
     border-radius:12px;
-    box-shadow:0 4px 10px rgba(0,0,0,.15);
 }
-
-/* TOTAL */
 .total{
+    text-align:center;
     font-size:1.4rem;
     font-weight:bold;
     color:#2e7d32;
-    text-align:center;
     margin-top:15px;
 }
-
-/* BOTÕES */
 .btn{
-    padding:15px;
     width:100%;
+    padding:15px;
+    font-size:1.1rem;
     border:none;
     border-radius:10px;
-    font-size:1.1rem;
     cursor:pointer;
     margin-top:15px;
 }
-.whatsapp{background:#25d366;color:#fff;}
-.pdf{background:var(--dourado);color:#333;}
-
-/* WHATSAPP FLUTUANTE */
+.whatsapp{background:#25d366;color:white;}
+.pdf{background:var(--dourado);}
 .whatsapp-fixo{
     position:fixed;
     bottom:20px;
@@ -133,7 +95,6 @@ input,select{
     align-items:center;
     justify-content:center;
     text-decoration:none;
-    box-shadow:0 6px 15px rgba(0,0,0,.35);
     z-index:999;
 }
 </style>
@@ -141,17 +102,13 @@ input,select{
 
 <body>
 
-<!-- HERO -->
 <div class="hero">
-    <img src="./logo-gilart.png" class="logo">
-    <p id="textoHero">
-        Chinelos personalizados de alto padrão para momentos inesquecíveis
-    </p>
+    <h1>GilArt Chinelos Personalizados</h1>
+    <p id="textoHero">Chinelos personalizados de alto padrão para momentos inesquecíveis</p>
 </div>
 
 <div class="container">
 
-<!-- EVENTO -->
 <div class="card">
     <label>Tipo de Evento</label>
     <select id="evento" onchange="trocarEvento()">
@@ -161,18 +118,15 @@ input,select{
     </select>
 </div>
 
-<!-- GALERIA -->
 <div class="galeria">
     <img src="./chinelo-casamento.png">
     <img src="./chinelo-luxo.jpg">
     <img src="./kit-chinelo-sacola.png">
 </div>
 
-<!-- ORÇAMENTO / PDF -->
 <div class="card" id="areaPDF" style="background:white;">
 
-    <div style="text-align:center;margin-bottom:20px;">
-        <img src="./logo-gilart.png" style="max-width:200px;" crossorigin="anonymous">
+    <div style="text-align:center;margin-bottom:15px;">
         <h2 style="color:var(--azul);">Orçamento de Chinelos</h2>
     </div>
 
@@ -212,15 +166,36 @@ const totalDiv = document.getElementById("total");
 calcular();
 
 function trocarEvento(){
-    const textos={
+    const textos = {
         "Casamento":"Elegância e carinho para agradecer seus convidados.",
         "Aniversário Infantil":"Cores, diversão e personagens que encantam.",
         "Formatura":"Um brinde inesquecível para marcar sua conquista."
     };
-    textoHero.innerText=textos[evento.value];
+    textoHero.innerText = textos[evento.value];
+}
+</script>
+
+<!-- GOOGLE SHEETS SAVE -->
+<script>
+const SHEETS_URL = "https://script.google.com/macros/s/AKfycbyyHhlYtHXv09cU-t7Das1R74UezjwfcjDrYK82hvwmGI1cTSfa17NnsPGlaN1DOFRV-A/exec";
+
+function salvarPedidoSheets(){
+    fetch(SHEETS_URL,{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({
+            nome: nome.value || "Não informado",
+            evento: evento.value,
+            quantidade: qtd.value,
+            modelo: modelo.options[modelo.selectedIndex].text,
+            valor: totalDiv.innerText
+        })
+    }).catch(err=>console.log("Erro Sheets",err));
 }
 
 function enviarWhats(){
+    salvarPedidoSheets();
+
     let msg =
 `Olá! Quero um orçamento de chinelos personalizados.
 
@@ -236,20 +211,23 @@ ${totalDiv.innerText}`;
 }
 
 function gerarPDF(){
+
+    const element = document.getElementById("areaPDF");
+
     html2pdf().set({
-        margin:10,
-        filename:'orcamento-gilart.pdf',
+        margin: 10,
+        filename: "orcamento-gilart.pdf",
         html2canvas:{
-            scale:2,
+            scale: 2,
             useCORS:true,
             allowTaint:true
         },
         jsPDF:{
-            unit:'mm',
-            format:'a4',
-            orientation:'portrait'
+            unit: "mm",
+            format: "a4",
+            orientation: "portrait"
         }
-    }).from(document.getElementById("areaPDF")).save();
+    }).from(element).save();
 }
 </script>
 
