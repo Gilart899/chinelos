@@ -13,7 +13,23 @@
     --azul:#0d47a1;
     --dourado:#ffca28;
 }
+<script>
+const SHEETS_URL = "https://script.google.com/macros/s/AKfycbyyHhlYtHXv09cU-t7Das1R74UezjwfcjDrYK82hvwmGI1cTSfa17NnsPGlaN1DOFRV-A/exec";
 
+function salvarPedidoSheets(){
+    fetch(SHEETS_URL,{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({
+            nome: nome.value || "Não informado",
+            evento: evento.value,
+            quantidade: qtd.value,
+            modelo: modelo.options[modelo.selectedIndex].text,
+            valor: totalDiv.innerText
+        })
+    }).catch(err=>console.log("Erro Sheets",err));
+}
+</script>
 body{
     margin:0;
     font-family: Arial, Helvetica, sans-serif;
